@@ -1,0 +1,19 @@
+{
+  "name": "project4",
+  "version": "0.0.1",
+  "description": "Project 4 Udacity Google FEND",
+  "main": "index.html",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "author": "Mikołaj Dyczkowski",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.9.0"
+  }
+}
