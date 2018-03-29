@@ -30,17 +30,25 @@ html {
 .card {
   width: 25%;
   height: 25%;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+  font-size: 0;
   background-color: white;
+  text-align: center;
   border: 2px solid black;
 }
 
 .card--open {
   background-color: blue;
+  font-size: 4em;
 }
 
 .card--match {
   animation: shake 1.5s;
   transition-duration: 1.5s;
+  transition-property: background-color, visibility;
   background-color: darkgreen;
   visibility: hidden;
 }

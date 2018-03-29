@@ -1,6 +1,36 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
+const symbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+const symbolsArray2 = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
 
+// Helper function picking random number from 'min' to 'max'
+function randomNumber(min, max) {
+  return Math.floor(Math.random() * ((max - min) + 1)) + min;
+}
+//
+// -----------> Randomizing cards and displaying them
+//
+const cardsArray = [];
+const docFragment = document.createDocumentFragment();
+for (let i = 0; i <= 15; i += 1) {
+  cardsArray[i] = document.createElement('div');
+  cardsArray[i].classList.add('card');
+  docFragment.appendChild(cardsArray[i]);
+}
+for (let i = 0; i <= 15; i += 1) {
+  const arrayNumber = randomNumber(1, 2);
+  if ((arrayNumber === 1 && symbolsArray.length !== 0) ||
+      (arrayNumber === 2 && symbolsArray2.length === 0)) {
+    const symbolNumber = randomNumber(0, symbolsArray.length - 1);
+    cardsArray[i].textContent = symbolsArray[symbolNumber];
+    symbolsArray.splice(symbolNumber, 1);
+  } else if (symbolsArray2.length !== 0) {
+    const symbolNumber = randomNumber(0, symbolsArray2.length - 1);
+    cardsArray[i].textContent = symbolsArray2[symbolNumber];
+    symbolsArray2.splice(symbolNumber, 1);
+  }
+}
+cardGrid.appendChild(docFragment);
 //
 // -----------> Comparing selected cards
 //
@@ -32,7 +62,7 @@ cardGrid.addEventListener('click', (event) => {
         openCards[0].classList.remove('card--open', 'card--nomatch');
         openCards[1].classList.remove('card--open', 'card--nomatch');
         openCards.length = 0;
-      }, 1500); // clearing the array and closing cards
+      }, 1200); // clearing the array and closing unmatched cards
     }
   }
 });
