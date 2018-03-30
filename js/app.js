@@ -41,14 +41,13 @@ function areMatching() {
     openCards[1].classList.add('card--match');
     numberOfMatchedPairs += 1;
     if (numberOfMatchedPairs === 8) {
-      const content = document.querySelector('.content');
       const winMessage = document.createElement('div');
       const winTextNode = document.createTextNode('Congratulations, you won!');
       const winParagraph = document.createElement('p');
       winParagraph.appendChild(winTextNode);
       winMessage.appendChild(winParagraph);
       winMessage.classList.add('win-message');
-      content.appendChild(winMessage);
+      cardGrid.appendChild(winMessage);
     }
   } else {
     openCards[0].classList.add('card--nomatch');
@@ -62,7 +61,8 @@ function areMatching() {
 //
 cardGrid.addEventListener('click', (event) => {
   if (openCards.length < 2) {
-    if (event.target.classList.contains('card-grid')) { // Not allowing clicks on grid (or already matched cards)
+    if (event.target.classList.contains('card-grid') || event.target.classList.contains('win-message') ||
+    event.target.tagName === 'P') { // Not allowing clicks on grid, already matched cards and win message
       return;
     }
     event.target.classList.add('card--open');
