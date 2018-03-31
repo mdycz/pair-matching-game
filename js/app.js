@@ -1,7 +1,6 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
-const symbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
-const symbolsArray2 = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+const originalSymbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
 
 // Helper function picking random number from 'min' to 'max'
 function randomNumber(min, max) {
@@ -10,27 +9,32 @@ function randomNumber(min, max) {
 //
 // -----------> Randomizing cards and displaying them
 //
-const cardsArray = [];
-const docFragment = document.createDocumentFragment();
-for (let i = 0; i <= 15; i += 1) {
-  cardsArray[i] = document.createElement('div');
-  cardsArray[i].classList.add('card');
-  docFragment.appendChild(cardsArray[i]);
-}
-for (let i = 0; i <= 15; i += 1) {
-  const arrayNumber = randomNumber(1, 2);
-  if ((arrayNumber === 1 && symbolsArray.length !== 0) ||
-      (arrayNumber === 2 && symbolsArray2.length === 0)) {
-    const symbolNumber = randomNumber(0, symbolsArray.length - 1);
-    cardsArray[i].textContent = symbolsArray[symbolNumber];
-    symbolsArray.splice(symbolNumber, 1);
-  } else if (symbolsArray2.length !== 0) {
-    const symbolNumber = randomNumber(0, symbolsArray2.length - 1);
-    cardsArray[i].textContent = symbolsArray2[symbolNumber];
-    symbolsArray2.splice(symbolNumber, 1);
+function randomCardsCreate() {
+  const cardsArray = [];
+  const symbolsArray = originalSymbolsArray.slice(0);
+  const symbolsArray2 = originalSymbolsArray.slice(0);
+  const docFragment = document.createDocumentFragment();
+  for (let i = 0; i <= 15; i += 1) {
+    cardsArray[i] = document.createElement('div');
+    cardsArray[i].classList.add('card');
+    docFragment.appendChild(cardsArray[i]);
   }
+  for (let i = 0; i <= 15; i += 1) {
+    const arrayNumber = randomNumber(1, 2);
+    if ((arrayNumber === 1 && symbolsArray.length !== 0) ||
+        (arrayNumber === 2 && symbolsArray2.length === 0)) {
+      const symbolNumber = randomNumber(0, symbolsArray.length - 1);
+      cardsArray[i].textContent = symbolsArray[symbolNumber];
+      symbolsArray.splice(symbolNumber, 1);
+    } else if (symbolsArray2.length !== 0) {
+      const symbolNumber = randomNumber(0, symbolsArray2.length - 1);
+      cardsArray[i].textContent = symbolsArray2[symbolNumber];
+      symbolsArray2.splice(symbolNumber, 1);
+    }
+  }
+  cardGrid.appendChild(docFragment);
 }
-cardGrid.appendChild(docFragment);
+randomCardsCreate();
 //
 // -----------> Comparing selected cards
 //
@@ -44,9 +48,23 @@ function areMatching() {
       const winMessage = document.createElement('div');
       const winTextNode = document.createTextNode('Congratulations, you won!');
       const winParagraph = document.createElement('p');
+      const restartButton = document.createElement('button');
+      restartButton.setAttribute('type', 'button');
+      restartButton.classList.add('restart-button');
+      restartButton.textContent = '↺';
+      restartButton.addEventListener('click', (event) => {
+        while (cardGrid.firstChild) {
+          cardGrid.removeChild(cardGrid.firstChild);
+        }
+        numberOfMatchedPairs = 0;
+        randomCardsCreate();
+        winMessage.remove();
+        event.stopPropagation();
+      });
       winParagraph.appendChild(winTextNode);
       winMessage.appendChild(winParagraph);
       winMessage.classList.add('win-message');
+      winMessage.appendChild(restartButton);
       cardGrid.appendChild(winMessage);
     }
   } else {
