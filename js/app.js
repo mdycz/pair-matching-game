@@ -1,6 +1,7 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+let timerInterval;
 let dateStart = Date.now();
 // Helper function picking random number from 'min' to 'max'
 function randomNumber(min, max) {
@@ -14,14 +15,11 @@ function timerFunction() {
   const dateNow = Date.now();
   const minutes = Math.floor(((dateNow - dateStart) / 1000) / 60);
   const seconds = Math.floor((((dateNow - dateStart) - (minutes * 60 * 1000)) / 1000));
-  timer.textContent = `${(minutes > 0) ? `0${minutes}` : '00'}:${(seconds < 10) ? `0${seconds}` : seconds}`;
+  timer.textContent = `${(minutes < 10) ? `0${minutes}` : `${minutes}`}:${(seconds < 10) ? `0${seconds}` : seconds}`;
 }
 function stopTimer(interval) {
   clearInterval(interval);
 }
-const timerInterval = setInterval(() => {
-  timerFunction();
-}, 1000);
 //
 // -----------> Randomizing cards and displaying them
 //
@@ -81,6 +79,8 @@ function areMatching() {
         numberOfMatchedPairs = 0;
         numberOfMoves = 0;
         movesCounter.textContent = `Moves: ${numberOfMoves}`;
+        timer.classList.add('timer--not-started');
+        timer.textContent = '00:00';
         randomCardsCreate();
         winMessage.remove();
         event.stopPropagation();
@@ -113,8 +113,11 @@ cardGrid.addEventListener('click', (event) => {
     }
     event.target.classList.add('card--open');
     if (event.target !== openCards[0]) openCards.push(event.target);
-    if (numberOfMoves === 0 && openCards.length === 1) {
+    if (numberOfMoves === 0 && openCards.length === 1 && timer.classList.contains('timer--not-started')) { // when first card is flipped start the timer
       dateStart = Date.now();
+      timerInterval = setInterval(() => {
+        timerFunction();
+      }, 1000);
       timer.classList.remove('timer--not-started');
     }
     if (openCards.length === 2) {
