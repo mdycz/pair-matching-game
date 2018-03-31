@@ -79,8 +79,7 @@ function areMatching() {
 //
 cardGrid.addEventListener('click', (event) => {
   if (openCards.length < 2) {
-    if (event.target.classList.contains('card-grid') || event.target.classList.contains('win-message') ||
-    event.target.tagName === 'P') { // Not allowing clicks on grid, already matched cards and win message
+    if (!event.target.classList.contains('card')) { // Not allowing clicks on grid, already matched cards and win message
       return;
     }
     event.target.classList.add('card--open');
@@ -91,7 +90,7 @@ cardGrid.addEventListener('click', (event) => {
         openCards[0].classList.remove('card--open', 'card--nomatch');
         openCards[1].classList.remove('card--open', 'card--nomatch');
         openCards.length = 0;
-      }, 1300); // clearing the array and closing unmatched cards
+      }, 1400); // clearing the array and closing unmatched cards
     }
   }
 });
