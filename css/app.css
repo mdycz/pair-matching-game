@@ -13,15 +13,16 @@ html {
 }
 
 .content {
-  width: 100%;
+  width: 100vmin;
+  margin: 10px auto 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .card-grid {
-  width: 100vmin;
-  height: 100vmin;
+  width: 90vmin;
+  height: 90vmin;
   max-width: 600px;
   max-height: 600px;
   margin-left: auto;
@@ -30,6 +31,14 @@ html {
   grid-template-columns: repeat(4, calc((100% - 60px)/4));
   grid-template-rows: repeat(4, calc((100% - 60px)/4));
   grid-gap: 20px;
+}
+
+.gameinfo {
+  width: 90vmin;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .card-grid > div:nth-child(4n+1):nth-child(-n + 16) {
@@ -113,10 +122,14 @@ html {
   border-radius: 2px;
 }
 
+.win-message-moves-counter {
+  flex-grow: 1;
+}
+
 .restart-button {
   width: 50px;
   height: 40px;
-  flex-grow: 1;
+  margin: 20px 0;
   border: 1px solid yellow;
   font-size: 2em;
 }

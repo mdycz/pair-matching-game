@@ -1,7 +1,6 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
-
 // Helper function picking random number from 'min' to 'max'
 function randomNumber(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
@@ -38,8 +37,12 @@ randomCardsCreate();
 //
 // -----------> Comparing selected cards
 //
+let numberOfMoves = 0;
 let numberOfMatchedPairs = 0;
 function areMatching() {
+  const movesCounter = document.querySelector('.moves-counter');
+  numberOfMoves += 1;
+  movesCounter.textContent = `Moves: ${numberOfMoves}`;
   if (openCards[0].textContent === openCards[1].textContent) {
     openCards[0].classList.add('card--match');
     openCards[1].classList.add('card--match');
@@ -48,6 +51,7 @@ function areMatching() {
       const winMessage = document.createElement('div');
       const winTextNode = document.createTextNode('Congratulations, you won!');
       const winParagraph = document.createElement('p');
+      const movesNumberParagraph = document.createElement('p');
       const restartButton = document.createElement('button');
       restartButton.setAttribute('type', 'button');
       restartButton.classList.add('restart-button');
@@ -57,12 +61,17 @@ function areMatching() {
           cardGrid.removeChild(cardGrid.firstChild);
         }
         numberOfMatchedPairs = 0;
+        numberOfMoves = 0;
+        movesCounter.textContent = `Moves: ${numberOfMoves}`;
         randomCardsCreate();
         winMessage.remove();
         event.stopPropagation();
       });
       winParagraph.appendChild(winTextNode);
+      movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
+      movesNumberParagraph.classList.add('win-message-moves-counter');
       winMessage.appendChild(winParagraph);
+      winMessage.appendChild(movesNumberParagraph);
       winMessage.classList.add('win-message');
       winMessage.appendChild(restartButton);
       cardGrid.appendChild(winMessage);
