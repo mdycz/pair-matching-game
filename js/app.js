@@ -1,10 +1,27 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+let dateStart = Date.now();
 // Helper function picking random number from 'min' to 'max'
 function randomNumber(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
 }
+//
+// -----------> Time measuring
+//
+const timer = document.querySelector('.timer--time');
+function timerFunction() {
+  const dateNow = Date.now();
+  const minutes = Math.floor(((dateNow - dateStart) / 1000) / 60);
+  const seconds = Math.floor((((dateNow - dateStart) - (minutes * 60 * 1000)) / 1000));
+  timer.textContent = `${(minutes > 0) ? `0${minutes}` : '00'}:${(seconds < 10) ? `0${seconds}` : seconds}`;
+}
+function stopTimer(interval) {
+  clearInterval(interval);
+}
+const timerInterval = setInterval(() => {
+  timerFunction();
+}, 1000);
 //
 // -----------> Randomizing cards and displaying them
 //
@@ -48,11 +65,12 @@ function areMatching() {
     openCards[1].classList.add('card--match');
     numberOfMatchedPairs += 1;
     if (numberOfMatchedPairs === 8) {
+      stopTimer(timerInterval);
       const winMessage = document.createElement('div');
-      const winTextNode = document.createTextNode('Congratulations, you won!');
       const winParagraph = document.createElement('p');
       const movesNumberParagraph = document.createElement('p');
       const restartButton = document.createElement('button');
+      const timePlayed = document.createElement('p');
       restartButton.setAttribute('type', 'button');
       restartButton.classList.add('restart-button');
       restartButton.textContent = '↺';
@@ -67,11 +85,13 @@ function areMatching() {
         winMessage.remove();
         event.stopPropagation();
       });
-      winParagraph.appendChild(winTextNode);
       movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
       movesNumberParagraph.classList.add('win-message-moves-counter');
+      timePlayed.textContent = timer.textContent;
+      winParagraph.textContent = 'Congratulations, you won!';
       winMessage.appendChild(winParagraph);
       winMessage.appendChild(movesNumberParagraph);
+      winMessage.appendChild(timePlayed);
       winMessage.classList.add('win-message');
       winMessage.appendChild(restartButton);
       cardGrid.appendChild(winMessage);
@@ -93,6 +113,10 @@ cardGrid.addEventListener('click', (event) => {
     }
     event.target.classList.add('card--open');
     if (event.target !== openCards[0]) openCards.push(event.target);
+    if (numberOfMoves === 0 && openCards.length === 1) {
+      dateStart = Date.now();
+      timer.classList.remove('timer--not-started');
+    }
     if (openCards.length === 2) {
       areMatching();
       setTimeout(() => {
@@ -103,7 +127,3 @@ cardGrid.addEventListener('click', (event) => {
     }
   }
 });
-
-//
-// ----------------> Win condition
-//

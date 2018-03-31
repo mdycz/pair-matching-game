@@ -36,9 +36,13 @@ html {
 .gameinfo {
   width: 90vmin;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-evenly;
   align-items: center;
+}
+
+.timer--not-started {
+  display: none;
 }
 
 .card-grid > div:nth-child(4n+1):nth-child(-n + 16) {
