@@ -50,25 +50,46 @@ function randomCardsCreate() {
 }
 randomCardsCreate();
 //
-// -----------> Comparing selected cards
+// -----------> This function is run when two cards are selected
 //
 let numberOfMoves = 0;
 let numberOfMatchedPairs = 0;
-function areMatching() {
+
+function whenTwoSelected() {
   const movesCounter = document.querySelector('.moves-counter');
   numberOfMoves += 1;
+  // Modifying star rating
+  const stars = document.getElementsByClassName('fa-star');
+  if (numberOfMoves === 10) {
+    stars[2].classList.add('far');
+    stars[2].classList.remove('fas');
+  } else if (numberOfMoves === 16) {
+    stars[1].classList.add('far');
+    stars[1].classList.remove('fas');
+  }
   movesCounter.textContent = `Moves: ${numberOfMoves}`;
-  if (openCards[0].textContent === openCards[1].textContent) {
+  if (openCards[0].textContent === openCards[1].textContent) { // comparing selected cards
     openCards[0].classList.add('card--match');
     openCards[1].classList.add('card--match');
     numberOfMatchedPairs += 1;
-    if (numberOfMatchedPairs === 8) {
-      stopTimer(timerInterval);
+    if (numberOfMatchedPairs === 8) { // checking win condition (when cards are matched, because it
+      stopTimer(timerInterval); // makes sense only then and not every time two cards are selected
       const winMessage = document.createElement('div');
       const winParagraph = document.createElement('p');
       const movesNumberParagraph = document.createElement('p');
       const restartButton = document.createElement('button');
       const timePlayed = document.createElement('p');
+      const starRating = document.createElement('div');
+
+      winParagraph.textContent = 'Congratulations, you won!';
+
+      movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
+      movesNumberParagraph.classList.add('win-message-moves-counter');
+
+      starRating.innerHTML = `${document.querySelector('.stars').innerHTML}`;
+
+      timePlayed.textContent = timer.textContent;
+
       restartButton.setAttribute('type', 'button');
       restartButton.classList.add('restart-button');
       restartButton.textContent = '↺';
@@ -79,21 +100,25 @@ function areMatching() {
         numberOfMatchedPairs = 0;
         numberOfMoves = 0;
         movesCounter.textContent = `Moves: ${numberOfMoves}`;
-        timer.classList.add('timer--not-started');
+
+        stars[1].classList.add('fas');
+        stars[1].classList.remove('far');
+        stars[2].classList.add('fas');
+        stars[2].classList.remove('far');
+
         timer.textContent = '00:00';
+
         randomCardsCreate();
         winMessage.remove();
         event.stopPropagation();
       });
-      movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
-      movesNumberParagraph.classList.add('win-message-moves-counter');
-      timePlayed.textContent = timer.textContent;
-      winParagraph.textContent = 'Congratulations, you won!';
+
       winMessage.appendChild(winParagraph);
       winMessage.appendChild(movesNumberParagraph);
+      winMessage.appendChild(starRating);
       winMessage.appendChild(timePlayed);
-      winMessage.classList.add('win-message');
       winMessage.appendChild(restartButton);
+      winMessage.classList.add('win-message');
       cardGrid.appendChild(winMessage);
     }
   } else {
@@ -113,15 +138,14 @@ cardGrid.addEventListener('click', (event) => {
     }
     event.target.classList.add('card--open');
     if (event.target !== openCards[0]) openCards.push(event.target);
-    if (numberOfMoves === 0 && openCards.length === 1 && timer.classList.contains('timer--not-started')) { // when first card is flipped start the timer
+    if (numberOfMoves === 0 && openCards.length === 1 && timer.classList.contains('timer--time')) { // when first card is flipped start the timer
       dateStart = Date.now();
       timerInterval = setInterval(() => {
         timerFunction();
       }, 1000);
-      timer.classList.remove('timer--not-started');
     }
     if (openCards.length === 2) {
-      areMatching();
+      whenTwoSelected();
       setTimeout(() => {
         openCards[0].classList.remove('card--open', 'card--nomatch');
         openCards[1].classList.remove('card--open', 'card--nomatch');

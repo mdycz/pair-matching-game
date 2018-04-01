@@ -41,10 +41,6 @@ html {
   align-items: center;
 }
 
-.timer--not-started {
-  display: none;
-}
-
 .card-grid > div:nth-child(4n+1):nth-child(-n + 16) {
   grid-column: 1 / 2;
 }
