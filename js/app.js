@@ -1,6 +1,7 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
-const originalSymbolsArray = ['☕', '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+const originalSymbolsArray = ['<i class="far fa-paper-plane"></i>',
+  '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
 let timerInterval;
 let dateStart = Date.now();
 // Helper function picking random number from 'min' to 'max'
@@ -38,11 +39,11 @@ function randomCardsCreate() {
     if ((arrayNumber === 1 && symbolsArray.length !== 0) ||
         (arrayNumber === 2 && symbolsArray2.length === 0)) {
       const symbolNumber = randomNumber(0, symbolsArray.length - 1);
-      cardsArray[i].textContent = symbolsArray[symbolNumber];
+      cardsArray[i].innerHTML = symbolsArray[symbolNumber];
       symbolsArray.splice(symbolNumber, 1);
     } else if (symbolsArray2.length !== 0) {
       const symbolNumber = randomNumber(0, symbolsArray2.length - 1);
-      cardsArray[i].textContent = symbolsArray2[symbolNumber];
+      cardsArray[i].innerHTML = symbolsArray2[symbolNumber];
       symbolsArray2.splice(symbolNumber, 1);
     }
   }
@@ -150,7 +151,7 @@ cardGrid.addEventListener('click', (event) => {
         openCards[0].classList.remove('card--open', 'card--nomatch');
         openCards[1].classList.remove('card--open', 'card--nomatch');
         openCards.length = 0;
-      }, 1400); // clearing the array and closing unmatched cards
+      }, 1500); // clearing the array and closing unmatched cards
     }
   }
 });
