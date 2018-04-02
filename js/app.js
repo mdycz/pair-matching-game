@@ -85,7 +85,6 @@ function whenTwoSelected() {
       winParagraph.textContent = 'Congratulations, you won!';
 
       movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
-      movesNumberParagraph.classList.add('win-message-moves-counter');
 
       starRating.innerHTML = `${document.querySelector('.stars').innerHTML}`;
 
