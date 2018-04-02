@@ -81,12 +81,11 @@ html {
   font-size: 0;
   background-color: white;
   text-align: center;
-  border: 2px solid black;
-  background-color: yellow;
+  border-radius: 5px;
+  background: linear-gradient(135deg, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 18%, rgba(240,84,178,1) 88%, rgba(240,84,178,1) 100%);
 }
 
 .card--open {
-  background-color: blue;
   font-size: 4em;
   transition-duration: 1s;
   transform: rotateY(180deg);
@@ -95,7 +94,8 @@ html {
 .card--match {
   animation: enlarge 1s;
   animation-delay: 0.5s;
-  background-color: darkgreen;
+  background: rgba(7,235,15,1);
+  background: radial-gradient(ellipse at center, rgba(7,235,15,1) 0%, rgba(48,227,54,1) 39%, rgba(112,191,115,1) 100%);
   visibility: hidden;
 }
 
@@ -111,7 +111,8 @@ html {
   animation-delay: 1s;
   transition-duration: 1s;
   transition-property: background-color transform;
-  background-color: red;
+  background: rgba(219,31,31,1);
+  background: radial-gradient(ellipse at center, rgba(219,31,31,1) 0%, rgba(219,31,31,1) 63%, rgba(217,83,83,1) 100%);
 }
 
 @keyframes shake {
