@@ -76,24 +76,24 @@ html {
 .card {
   display: flex;
   justify-content: center;
-  align-content: center;
+  align-items: center;
   flex-direction: column;
   font-size: 0;
-  background-color: white;
-  text-align: center;
   border-radius: 5px;
+  background: rgba(255,175,75,1);
   background: linear-gradient(135deg, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 18%, rgba(240,84,178,1) 88%, rgba(240,84,178,1) 100%);
 }
 
 .card--open {
   font-size: 4em;
-  transition-duration: 1s;
+  transition-duration: 0.5s;
   transform: rotateY(180deg);
 }
 
 .card--match {
   animation: enlarge 1s;
   animation-delay: 0.5s;
+  transition: visibility 1.5s, font-size 0.5s;
   background: rgba(7,235,15,1);
   background: radial-gradient(ellipse at center, rgba(7,235,15,1) 0%, rgba(48,227,54,1) 39%, rgba(112,191,115,1) 100%);
   visibility: hidden;
@@ -107,10 +107,9 @@ html {
   90% { transform: scale3d(1, 1, 1) rotateY(180deg);}
 }
 .card--nomatch {
-  animation: shake 1s;
-  animation-delay: 1s;
-  transition-duration: 1s;
-  transition-property: background-color transform;
+  animation: shake 0.7s;
+  animation-delay: 0.5s;
+  transition-duration: 0.5s;
   background: rgba(219,31,31,1);
   background: radial-gradient(ellipse at center, rgba(219,31,31,1) 0%, rgba(219,31,31,1) 63%, rgba(217,83,83,1) 100%);
 }
