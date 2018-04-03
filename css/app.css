@@ -8,21 +8,24 @@ html {
   box-sizing: border-box;
 }
 
-.container {
-  width: 100%;
+body {
+  background: rgb(64, 33, 74);
+  color: peachpuff;
+  font-size: 1.5em;
+  font-family: 'Chewy', cursive;
 }
 
 .content {
   width: 100vmin;
-  margin: 10px auto 0;
+  margin: 10px auto 15px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .card-grid {
-  width: 90vmin;
-  height: 90vmin;
+  width: 80vmin;
+  height: 80vmin;
   max-width: 600px;
   max-height: 600px;
   margin-left: auto;
@@ -34,11 +37,13 @@ html {
 }
 
 .gameinfo {
-  width: 90vmin;
+  width: 80vmin;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
+  margin: 10px 0;
 }
 
 .card-grid > div:nth-child(4n+1):nth-child(-n + 16) {
@@ -79,9 +84,11 @@ html {
   align-items: center;
   flex-direction: column;
   font-size: 0;
+  border: 1px solid #2d1833;
   border-radius: 5px;
   background: rgba(255,175,75,1);
-  background: linear-gradient(135deg, rgba(255,175,75,1) 0%, rgba(255,175,75,1) 18%, rgba(240,84,178,1) 88%, rgba(240,84,178,1) 100%);
+  background: rgba(168,40,91,1);
+  background: linear-gradient(135deg, rgba(168,40,91,1) 0%, rgba(168,40,91,1) 24%, rgba(227,139,32,1) 77%, rgba(227,139,32,1) 91%, rgba(227,139,32,1) 100%);
 }
 
 .card--open {
@@ -91,7 +98,7 @@ html {
 }
 
 .card--match {
-  animation: enlarge 1s;
+  animation: enlarge 0.5s;
   animation-delay: 0.5s;
   transition: visibility 1.5s, font-size 0.5s;
   background: rgba(7,235,15,1);
@@ -140,4 +147,34 @@ html {
   min-height: 48px;
   border: 1px solid yellow;
   font-size: 2em;
+}
+
+@keyframes shine{
+ 10% {
+   opacity: 1;
+   top: -30%;
+   left: -30%;
+   transition-property: left, top, opacity;
+   transition-duration: 0.7s, 0.7s, 0.15s;
+   transition-timing-function: ease;
+ }
+ 100% {
+   opacity: 0;
+   top: -30%;
+   left: -30%;
+   transition-property: left, top, opacity;
+ }
+}
+
+@media screen and (max-width: 410px) {
+  .gameinfo {
+    justify-content: space-evenly; 
+  }
+
+  .stars {
+    width: 100%;
+    text-align: center;
+    order: 1;
+    margin-bottom: 10px;
+  }
 }
