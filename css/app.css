@@ -184,3 +184,12 @@ body {
     margin-bottom: 10px;
   }
 }
+@media screen and (max-width: 390px) {
+    .win-message {
+      flex-direction: row;
+    }
+
+    .restart-button {
+      margin: auto 15px;
+    }
+}
