@@ -193,3 +193,8 @@ body {
       margin: auto 15px;
     }
 }
+@media screen and (min-width: 1800px) {
+  .card--open {
+    font-size: 4em;
+  }
+}
