@@ -1,7 +1,7 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['<i class="far fa-paper-plane"></i>',
-  '☸', '⚓', '⚛', '✐', '✈', '֍', '☃'];
+  '<i class="fas fa-beer"></i>', '<i class="fas fa-graduation-cap"></i>', '⚛', '✐', '<i class="fas fa-gamepad"></i>', '<i class="fab fa-fort-awesome"></i>', '☃']; // the array consists of whole <i> elements because this way one can use both icons and Unicode characters/any other text based icons. We are later using .innerHTML property for the same purpose.
 let timerInterval;
 let dateStart = Date.now();
 // Helper function picking random number from 'min' to 'max'
@@ -69,7 +69,7 @@ function whenTwoSelected() {
     stars[1].classList.remove('fas');
   }
   movesCounter.textContent = `Moves: ${numberOfMoves}`;
-  if (openCards[0].textContent === openCards[1].textContent) { // comparing selected cards
+  if (openCards[0].innerHTML === openCards[1].innerHTML) { // comparing selected cards
     openCards[0].classList.add('card--match');
     openCards[1].classList.add('card--match');
     numberOfMatchedPairs += 1;
@@ -138,7 +138,7 @@ cardGrid.addEventListener('click', (event) => {
     }
     event.target.classList.add('card--open');
     if (event.target !== openCards[0]) openCards.push(event.target);
-    if (numberOfMoves === 0 && openCards.length === 1 && timer.classList.contains('timer--time')) { // when first card is flipped start the timer
+    if (numberOfMoves === 0 && openCards.length === 1 && !event.target.classList.contains('card--open')) { // when first card is flipped start the timer. The last condition doesn't allow multiple clicks on first open card to reset the timer.
       dateStart = Date.now();
       timerInterval = setInterval(() => {
         timerFunction();
