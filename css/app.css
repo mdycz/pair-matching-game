@@ -31,9 +31,9 @@ body {
   margin-left: auto;
   margin-right: auto;
   display: grid;
-  grid-template-columns: repeat(4, calc((100% - 60px)/4));
-  grid-template-rows: repeat(4, calc((100% - 60px)/4));
-  grid-gap: 20px;
+  grid-template-columns: repeat(4, calc((100% - 45px)/4));
+  grid-template-rows: repeat(4, calc((100% - 45px)/4));
+  grid-gap: 15px;
 }
 
 .gameinfo {
@@ -100,7 +100,7 @@ body {
 .card--match {
   animation: enlarge 0.5s;
   animation-delay: 0.5s;
-  transition: visibility 1.5s, font-size 0.5s;
+  transition: visibility 1.5s, font-size 0.5s, transform 0.5s;
   background: rgba(7,235,15,1);
   background: radial-gradient(ellipse at center, rgba(7,235,15,1) 0%, rgba(48,227,54,1) 39%, rgba(112,191,115,1) 100%);
   visibility: hidden;
