@@ -55,7 +55,6 @@ randomCardsCreate();
 //
 let numberOfMoves = 0;
 let numberOfMatchedPairs = 0;
-
 function whenTwoSelected() {
   const movesCounter = document.querySelector('.moves-counter');
   numberOfMoves += 1;
@@ -74,52 +73,55 @@ function whenTwoSelected() {
     openCards[1].classList.add('card--match');
     numberOfMatchedPairs += 1;
     if (numberOfMatchedPairs === 8) { // checking win condition (when cards are matched, because it
-      stopTimer(timerInterval); // makes sense only then and not every time two cards are selected
-      const winMessage = document.createElement('div');
-      const winParagraph = document.createElement('p');
-      const movesNumberParagraph = document.createElement('p');
-      const restartButton = document.createElement('button');
-      const timePlayed = document.createElement('p');
-      const starRating = document.createElement('div');
+    // makes sense only then and not every time two cards are selected
+      setTimeout(() => {
+        stopTimer(timerInterval);
+        const winMessage = document.createElement('div');
+        const winParagraph = document.createElement('p');
+        const movesNumberParagraph = document.createElement('p');
+        const restartButton = document.createElement('button');
+        const timePlayed = document.createElement('p');
+        const starRating = document.createElement('div');
 
-      winParagraph.textContent = 'Congratulations, you won!';
+        winParagraph.textContent = 'Congratulations, you won!';
 
-      movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
+        movesNumberParagraph.textContent = `Moves: ${numberOfMoves}`;
 
-      starRating.innerHTML = `${document.querySelector('.stars').innerHTML}`;
+        starRating.innerHTML = `${document.querySelector('.stars').innerHTML}`;
 
-      timePlayed.textContent = timer.textContent;
+        timePlayed.textContent = timer.textContent;
 
-      restartButton.setAttribute('type', 'button');
-      restartButton.classList.add('restart-button');
-      restartButton.textContent = '↺';
-      restartButton.addEventListener('click', (event) => {
-        while (cardGrid.firstChild) {
-          cardGrid.removeChild(cardGrid.firstChild);
-        }
-        numberOfMatchedPairs = 0;
-        numberOfMoves = 0;
-        movesCounter.textContent = `Moves: ${numberOfMoves}`;
+        restartButton.setAttribute('type', 'button');
+        restartButton.classList.add('restart-button');
+        restartButton.textContent = '↺';
+        restartButton.addEventListener('click', (event) => {
+          while (cardGrid.firstChild) {
+            cardGrid.removeChild(cardGrid.firstChild);
+          }
+          numberOfMatchedPairs = 0;
+          numberOfMoves = 0;
+          movesCounter.textContent = `Moves: ${numberOfMoves}`;
 
-        stars[1].classList.add('fas');
-        stars[1].classList.remove('far');
-        stars[2].classList.add('fas');
-        stars[2].classList.remove('far');
+          stars[1].classList.add('fas');
+          stars[1].classList.remove('far');
+          stars[2].classList.add('fas');
+          stars[2].classList.remove('far');
 
-        timer.textContent = '00:00';
+          timer.textContent = '00:00';
 
-        randomCardsCreate();
-        winMessage.remove();
-        event.stopPropagation();
-      });
+          randomCardsCreate();
+          winMessage.remove();
+          event.stopPropagation();
+        });
 
-      winMessage.appendChild(winParagraph);
-      winMessage.appendChild(movesNumberParagraph);
-      winMessage.appendChild(starRating);
-      winMessage.appendChild(timePlayed);
-      winMessage.appendChild(restartButton);
-      winMessage.classList.add('win-message');
-      cardGrid.appendChild(winMessage);
+        winMessage.appendChild(winParagraph);
+        winMessage.appendChild(movesNumberParagraph);
+        winMessage.appendChild(starRating);
+        winMessage.appendChild(timePlayed);
+        winMessage.appendChild(restartButton);
+        winMessage.classList.add('win-message');
+        cardGrid.appendChild(winMessage);
+      }, 1000);
     }
   } else {
     openCards[0].classList.add('card--nomatch');
@@ -136,7 +138,6 @@ cardGrid.addEventListener('click', (event) => {
     if (!event.target.classList.contains('card')) { // Not allowing clicks on grid, already matched cards and win message
       return;
     }
-    event.target.classList.add('card--open');
     if (event.target !== openCards[0]) openCards.push(event.target);
     if (numberOfMoves === 0 && openCards.length === 1 && !event.target.classList.contains('card--open')) { // when first card is flipped start the timer. The last condition doesn't allow multiple clicks on first open card to reset the timer.
       dateStart = Date.now();
@@ -144,6 +145,7 @@ cardGrid.addEventListener('click', (event) => {
         timerFunction();
       }, 1000);
     }
+    event.target.classList.add('card--open');
     if (openCards.length === 2) {
       whenTwoSelected();
       setTimeout(() => {
