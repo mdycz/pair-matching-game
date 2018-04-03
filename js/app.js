@@ -1,7 +1,7 @@
 const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['<i class="far fa-paper-plane"></i>',
-  '<i class="fas fa-beer"></i>', '<i class="fas fa-graduation-cap"></i>', '⚛', '✐', '<i class="fas fa-gamepad"></i>', '<i class="fab fa-fort-awesome"></i>', '☃']; // the array consists of whole <i> elements because this way one can use both icons and Unicode characters/any other text based icons. We are later using .innerHTML property for the same purpose.
+  '<i class="fas fa-beer"></i>', '<i class="fas fa-graduation-cap"></i>', '<i class="fas fa-ship"></i>', '<i class="fas fa-birthday-cake"></i>', '<i class="fas fa-gamepad"></i>', '<i class="fab fa-fort-awesome"></i>', '<i class="fas fa-futbol"></i>']; // the array consists of whole <i> elements because this way one can use both icons and Unicode characters/any other text based icons. We are later using .innerHTML property for the same purpose.
 let timerInterval;
 let dateStart = Date.now();
 // Helper function picking random number from 'min' to 'max'
