@@ -81,7 +81,7 @@ function whenTwoSelected() {
         const movesNumberParagraph = document.createElement('p');
         const restartButton = document.createElement('button');
         const timePlayed = document.createElement('p');
-        const starRating = document.createElement('div');
+        const starRating = document.createElement('span');
 
         winParagraph.textContent = 'Congratulations, you won!';
 

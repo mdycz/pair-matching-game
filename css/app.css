@@ -48,7 +48,12 @@ body {
   width: 0;
   flex-grow: 1;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.timer--time {
+  width: 75px;
+  text-align: end;
 }
 
 .card-grid {
@@ -191,16 +196,14 @@ body {
 }
 
 @media screen and (max-width: 410px), screen and (max-height: 410px) {
-  .gameinfo {
-    justify-content: space-evenly;
-  }
-
   .moves-counter {
     width: 50%;
+    text-align: center;
   }
 
   .timer {
     width: 50%;
+    justify-content: center;
   }
 
   .stars {
