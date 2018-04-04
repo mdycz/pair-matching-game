@@ -38,6 +38,7 @@ body {
 
 .gameinfo {
   width: 80vmin;
+  max-width: 600px;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -184,7 +185,7 @@ body {
     margin-bottom: 10px;
   }
 }
-@media screen and (max-width: 390px) {
+@media screen and (max-width: 391px) {
     .win-message {
       flex-direction: row;
     }
@@ -196,5 +197,28 @@ body {
 @media screen and (min-width: 1800px) {
   .card--open {
     font-size: 4em;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 410px) {
+  .gameinfo {
+    justify-content: space-evenly;
+  }
+
+  .stars {
+    width: 100%;
+    text-align: center;
+    order: 1;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (orientation: landscape) and (max-height: 391px) {
+  .win-message {
+    flex-direction: row;
+  }
+
+  .restart-button {
+    margin: auto 15px;
   }
 }
