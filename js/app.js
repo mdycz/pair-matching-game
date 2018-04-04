@@ -60,10 +60,10 @@ function whenTwoSelected() {
   numberOfMoves += 1;
   // Modifying star rating
   const stars = document.getElementsByClassName('fa-star');
-  if (numberOfMoves === 10) {
+  if (numberOfMoves === 12) {
     stars[2].classList.add('far');
     stars[2].classList.remove('fas');
-  } else if (numberOfMoves === 16) {
+  } else if (numberOfMoves === 18) {
     stars[1].classList.add('far');
     stars[1].classList.remove('fas');
   }
