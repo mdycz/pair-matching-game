@@ -37,6 +37,7 @@ body {
 .moves-counter {
   width: 0;
   flex-grow: 1;
+  text-align: center;
 }
 
 .stars {
@@ -49,12 +50,23 @@ body {
   width: 0;
   flex-grow: 1;
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 .timer--time {
   width: 75px;
   text-align: end;
+}
+
+.restart-button-ingame {
+  min-width: 60px;
+  min-height: 48px;
+  color: peachpuff;
+  font-size: 1.5em;
+  font-weight: 900;
+  padding-right: 0;
+  border: none;
+  background: transparent;
 }
 
 .card-grid {
@@ -196,19 +208,25 @@ body {
  }
 }
 
-@media screen and (max-width: 410px), screen and (max-height: 410px) {
+@media screen and (max-width: 555px), screen and (max-height: 555px) {
+  .gameinfo {
+    flex-direction: column;
+    max-height: 130px;
+  }
   .moves-counter {
     width: 50%;
+    order: 2;
     text-align: center;
   }
 
   .timer {
     width: 50%;
     justify-content: center;
+    margin-bottom: 12px;
   }
 
   .stars {
-    width: 100%;
+    width: 50%;
     flex-grow: 0;
     text-align: center;
     order: 3;

@@ -2,8 +2,12 @@ const openCards = [];
 const cardGrid = document.querySelector('.card-grid');
 const originalSymbolsArray = ['<i class="far fa-paper-plane"></i>',
   '<i class="fas fa-beer"></i>', '<i class="fas fa-graduation-cap"></i>', '<i class="fas fa-ship"></i>', '<i class="fas fa-birthday-cake"></i>', '<i class="fas fa-gamepad"></i>', '<i class="fab fa-fort-awesome"></i>', '<i class="fas fa-futbol"></i>']; // the array consists of whole <i> elements because this way one can use both icons and Unicode characters/any other text based icons. We are later using .innerHTML property for the same purpose.
+let numberOfMoves = 0;
+let numberOfMatchedPairs = 0;
 let timerInterval;
 let dateStart = Date.now();
+const movesCounter = document.querySelector('.moves-counter');
+const stars = document.getElementsByClassName('fa-star');
 // Helper function picking random number from 'min' to 'max'
 function randomNumber(min, max) {
   return Math.floor(Math.random() * ((max - min) + 1)) + min;
@@ -51,15 +55,37 @@ function randomCardsCreate() {
 }
 randomCardsCreate();
 //
-// -----------> This function is run when two cards are selected
+// -----------> Restart game function
 //
-let numberOfMoves = 0;
-let numberOfMatchedPairs = 0;
+function restartGame() {
+  console.log('resetting');
+  while (cardGrid.firstChild) {
+    cardGrid.removeChild(cardGrid.firstChild);
+  }
+  numberOfMatchedPairs = 0;
+  numberOfMoves = 0;
+  movesCounter.textContent = `Moves: ${numberOfMoves}`;
+
+  stars[1].classList.add('fas');
+  stars[1].classList.remove('far');
+  stars[2].classList.add('fas');
+  stars[2].classList.remove('far');
+
+  timer.textContent = '00:00';
+
+  randomCardsCreate();
+}
+// Click listener for restart button in-game
+const restartButtonInGame = document.querySelector('.restart-button-ingame');
+restartButtonInGame.addEventListener('click', () => {
+  stopTimer(timerInterval);
+  restartGame();
+});
+//
+// -----------> This function is run when two cards are selected
 function whenTwoSelected() {
-  const movesCounter = document.querySelector('.moves-counter');
   numberOfMoves += 1;
   // Modifying star rating
-  const stars = document.getElementsByClassName('fa-star');
   if (numberOfMoves === 12) {
     stars[2].classList.add('far');
     stars[2].classList.remove('fas');
@@ -95,21 +121,7 @@ function whenTwoSelected() {
         restartButton.classList.add('restart-button');
         restartButton.textContent = '↺';
         restartButton.addEventListener('click', (event) => {
-          while (cardGrid.firstChild) {
-            cardGrid.removeChild(cardGrid.firstChild);
-          }
-          numberOfMatchedPairs = 0;
-          numberOfMoves = 0;
-          movesCounter.textContent = `Moves: ${numberOfMoves}`;
-
-          stars[1].classList.add('fas');
-          stars[1].classList.remove('far');
-          stars[2].classList.add('fas');
-          stars[2].classList.remove('far');
-
-          timer.textContent = '00:00';
-
-          randomCardsCreate();
+          restartGame();
           winMessage.remove();
           event.stopPropagation();
         });
