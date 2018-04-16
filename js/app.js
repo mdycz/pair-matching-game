@@ -58,7 +58,6 @@ randomCardsCreate();
 // -----------> Restart game function
 //
 function restartGame() {
-  console.log('resetting');
   while (cardGrid.firstChild) {
     cardGrid.removeChild(cardGrid.firstChild);
   }
@@ -72,7 +71,7 @@ function restartGame() {
   stars[2].classList.remove('far');
 
   timer.textContent = '00:00';
-
+  openCards.length = 0;
   randomCardsCreate();
 }
 // Click listener for restart button in-game
@@ -80,6 +79,7 @@ const restartButtonInGame = document.querySelector('.restart-button-ingame');
 restartButtonInGame.addEventListener('click', () => {
   stopTimer(timerInterval);
   restartGame();
+
 });
 //
 // -----------> This function is run when two cards are selected
