@@ -9,3 +9,6 @@ The game measures player's current game time and number of moves. The latter is 
 * 1 star - 18+ moves
 ## Winning
 When all 8 card pairs are found, the game is won and a summary message appears. It states how long it took the player to win, how many moves they made and the star rating. It also displays the restart button, so the player can start over.
+## TODO
+  * Add keyboard support
+  * possible a11y improvements
