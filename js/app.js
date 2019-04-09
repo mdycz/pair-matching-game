@@ -1,4 +1,4 @@
-(function gameLoop() {
+(function gameLoop () {
   const openCards = [];
   const cardGrid = document.querySelector('.card-grid');
   const originalSymbolsArray = ['<i class="far fa-paper-plane"></i>',
@@ -8,28 +8,28 @@
   let timerInterval;
   let dateStart = Date.now();
   const movesCounter = document.querySelector('.moves-counter');
-  const stars = document.getElementsByClassName('fa-star');
+  const stars = document.getElementsByClassName('fa');
   // Helper function picking random number from 'min' to 'max'
-  function randomNumber(min, max) {
+  function randomNumber (min, max) {
     return Math.floor(Math.random() * ((max - min) + 1)) + min;
   }
   //
   // -----------> Time measuring
   //
   const timer = document.querySelector('.timer--time');
-  function timerFunction() {
+  function timerFunction () {
     const dateNow = Date.now();
     const minutes = Math.floor(((dateNow - dateStart) / 1000) / 60);
     const seconds = Math.floor((((dateNow - dateStart) - (minutes * 60 * 1000)) / 1000));
     timer.textContent = `${(minutes < 10) ? `0${minutes}` : `${minutes}`}:${(seconds < 10) ? `0${seconds}` : seconds}`;
   }
-  function stopTimer(interval) {
+  function stopTimer (interval) {
     clearInterval(interval);
   }
   //
   // -----------> Randomizing cards and displaying them
   //
-  function randomCardsCreate() {
+  function randomCardsCreate () {
     const cardsArray = [];
     const symbolsArray = originalSymbolsArray.slice(0);
     const symbolsArray2 = originalSymbolsArray.slice(0);
@@ -58,7 +58,7 @@
   //
   // -----------> Restart game function
   //
-  function restartGame() {
+  function restartGame () {
     while (cardGrid.firstChild) {
       cardGrid.removeChild(cardGrid.firstChild);
     }
@@ -83,10 +83,10 @@
   });
   //
   // -----------> This function is run when two cards are selected
-  function whenTwoSelected() {
+  function whenTwoSelected () {
     numberOfMoves += 1;
     // Modifying star rating
-    (function modifyRating() {
+    (function modifyRating () {
       if (numberOfMoves === 12) {
         stars[2].classList.add('far');
         stars[2].classList.remove('fas');
@@ -96,7 +96,7 @@
       }
     }());
     movesCounter.textContent = `Moves: ${numberOfMoves}`;
-    (function compareCards() {
+    (function compareCards () {
       if (openCards[0].innerHTML === openCards[1].innerHTML) { // comparing selected cards
         openCards[0].classList.add('card--match');
         openCards[1].classList.add('card--match');
